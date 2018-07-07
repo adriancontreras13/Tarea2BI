@@ -2,6 +2,7 @@
 lag=4;
 %data = load("nuevo.txt");
 data= csvread("daily-minimum-temperatures-in-me.csv");
+data = data(:,2);
 train_size = 0.6;
 l=3;
 H=6;
