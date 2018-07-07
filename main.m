@@ -1,7 +1,7 @@
 %Parametros
 lag=4;
 %data = load("nuevo.txt");
-data= csvread();
+data= csvread("daily-minimum-temperatures-in-me.csv");
 train_size = 0.6;
 l=3;
 H=6;
@@ -16,9 +16,9 @@ h=hankel(data,l);
 [C,r]=svalues(h);
 
 %Altas frecuencias y Bajas frecuencias(XH Y XL)
-%[Hf,Lf]=frecuencias(C,r);
-%tamano = size(C{1},2);
-tamano = size(Hf,2);
+[Hf,Lf]=frecuencias(C,r);
+tamano = size(C{1},2);
+%tamano = size(Hf,2);
 
 %Entrenamiento y testing de altas y bajas frecuencias
 [Lf_train,Hf_train,Lf_test,Hf_test]=train_test_split(Lf,Hf,train_size,tamano);
@@ -41,5 +41,5 @@ training_ar(X_Lf_train,Y_Lf_train,"Coeficientes_Lf");
 %Training HF
 training_ar(X_Hf_train,Y_Hf_train,"Coeficientes_Hf");
 %Testing
-testing_ar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train);
+%testing_ar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train);
 
