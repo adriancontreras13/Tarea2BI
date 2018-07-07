@@ -35,6 +35,9 @@ tamano = size(C{1},2);
 
 [X_LfHf_test,Y_LfHf_test] = concat(X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
 
+%%SVM%%
+[svm]=svm_func(X_Lf_train,Y_Lf_train,X_Lf_test, Y_Lf_test,train_size,tamano);
+
 %% AR %%
 %Training AR
 %Training LF
