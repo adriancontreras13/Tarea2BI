@@ -58,12 +58,26 @@ tamano = size(C{1},2);
 
 [X_LfHf_test,Y_LfHf_test] = concat(X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
 
+
+%%MLP%%
+%topologias = [40 20; 20 25; 33 24; 20 40; 30 20; 20 20; 20 30; 20 18; 20 19; 21 19];
+topologias = [5 5;2 2];
+iteraciones = 100;
+%Training con HF
+%mlp_main(X_Hf_train',Y_Hf_train',X_Hf_test', Y_Hf_test',topologias,iteraciones);
+%Training con LF
+%mlp_main(X_LfHf_train,Y_LfHf_train,X_Hf_test,Y_Hf_test,topologias,iteraciones);
+
+%%SVM%%
+[svm]=svm_func(X_Lf_train,Y_Lf_train,X_Lf_test, Y_Lf_test,train_size,tamano);
+
+
 %% AR %%
 %Training AR
 %Training LF
-training_ar(X_Lf_train,Y_Lf_train,"Coeficientes_Lf");
+%training_ar(X_Lf_train,Y_Lf_train,"Coeficientes_Lf");
 %Training HF
-training_ar(X_Hf_train,Y_Hf_train,"Coeficientes_Hf");
+%training_ar(X_Hf_train,Y_Hf_train,"Coeficientes_Hf");
 %Testing
 %testing_ar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train);
 
