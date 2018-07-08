@@ -41,12 +41,12 @@ tamano = size(C{1},2);
 topologias = [5 5;2 2];
 iteraciones = 100;
 %Training con HF
-%mlp_main(X_Hf_train',Y_Hf_train',X_Hf_test', Y_Hf_test',topologias,iteraciones);
+mlp_main(X_Hf_train',Y_Hf_train',X_Hf_test', Y_Hf_test',topologias,iteraciones);
 %Training con LF
 %mlp_main(X_LfHf_train,Y_LfHf_train,X_Hf_test,Y_Hf_test,topologias,iteraciones);
 
 %%SVM%%
-[svm]=svm_func(X_Lf_train,Y_Lf_train,X_Lf_test, Y_Lf_test,train_size,tamano);
+%[svm]=svm_func(X_Lf_train,Y_Lf_train,X_Lf_test, Y_Lf_test,train_size,tamano);
 
 
 %% AR %%
