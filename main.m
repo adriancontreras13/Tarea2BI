@@ -7,15 +7,15 @@ train_size = 0.6;
 l=3;
 H=6;
 autocovar = autocovarianza(data,l);
-autocorre = autocorrelacion(data,l);
-
+%autocorre = autocorrelacion(data,l);
 %==============================================================================%
-  more off;
+   
   for i = 1:l
     autocorr(i) = autocorrelacion(data,i); 
   end
   
   [intervalo, N]= intervalo_de_confianza(autocorr)
+  
   
   figure(1);
   h = stem(autocorr);
@@ -27,8 +27,7 @@ autocorre = autocorrelacion(data,l);
   ylabel('Autocorrelacion');
   title("Autocorrelacion vs Lag");
   grid on
-  print -dpng ACF 
-
+  %print -dpng ACF
 %==============================================================================%
 %Normalizacion de data
 data = data/norm(data);

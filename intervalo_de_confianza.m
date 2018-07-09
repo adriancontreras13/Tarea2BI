@@ -5,4 +5,5 @@ function [intervalo, N] = intervalo_de_confianza(autocorr)
     x_bar=mean(autocorr);
     sigma=(std(autocorr));
     intervalo=[x_bar-u*sigma/sqrt(N),x_bar+u*sigma/sqrt(N)];
+    disp(intervalo);
 endfunction

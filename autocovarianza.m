@@ -7,7 +7,4 @@ function [autocovar] = autocovarianza(data,l)
      sum=sum+((data(t)-media)*(data(t+l)-media));
    end
    autocovar = factor*sum;
-   fprintf("Autocovarianza:");
-   disp(autocovar);
-  
 endfunction
