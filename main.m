@@ -1,65 +1,73 @@
 %Parametros
-arreglo_hankel=[100,500,1000,1500];
-arreglo_h=[1,2,3];
+%Rango de las L de hankel
+arreglo_hankel=[2,7];
+%Rango de las h del Horizonte
+arreglo_h=[2,7];
+%Arreglo de lags
 arreglo_lag=[1,2,3];
-lag=3;
-%data = load("nuevo.txt");
-data= csvread("daily-minimum-temperatures-in-me.csv");
+%Datasets
+data= csvread("mean-daily-temperature-fisher-ri.csv");
+%data= csvread("daily-minimum-temperatures-in-me.csv");
 data = data(:,2);
-data=data(1:50);
-
-train_size = 0.6;
+data= data(1:500);
+train_size = 0.8;
 %==============================================================================%
-l=10;
-H=4;
-autocovar = autocovarianza(data,l);
+l=500;
+H=1;
+%autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
 %==============================================================================% 
+#{
+top_global.L=-1;
+top_global.h=-1;
+top_global.mnsc=-999999999999999;
+for ind_L=arreglo_hankel(1):arreglo_hankel(2)
+  for ind_H=arreglo_h(1):arreglo_h(2)
+    for ind_Lag=1:length(arreglo_lag)
+      mnsc_lag_local=[];
+      for i=1:ind_H
+        H=i;
+        lag=arreglo_lag(ind_Lag);
+        l=ind_L;
+        %Insertar procesamiento de data
+        [X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test]=procesa_data(data,train_size,l,lag,H);
+        %Insertar ARR y ARX          
+        mnsc=aar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
+        mnsc_lag_local(end+1)=mnsc.mnsc;
+        %Insertar MLP y MLPX
+        
+        %insertar SVM SVMX
+      endfor
+      if(mean(mnsc_lag_local)>mean(top_global.mnsc))
+        top_global.mnsc=mean(mnsc_lag_local);
+        top_global.L=l;
+        top_global.h=H;
+      endif
+    endfor
+  endfor
+endfor
 
-%Grafico ACF  
-ACF(data,l);
+disp(top_global);
+#}
 %==============================================================================%
-%Normalizacion de data
-data = data/norm(data);
-
-
-%Matriz de Hankel
-h=hankel(data,l);
-
-%Descomposicion de valores singulares
-[C,r]=svalues(h);
-
-%Altas frecuencias y Bajas frecuencias(XH Y XL)
-[Hf,Lf]=frecuencias(C,r);
-
-%Pruebas, comentar si no se usa 
-%Lf = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20];
-%Hf = [21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40];
-
-
-tamano = size(Hf,2);
-
-%Entrenamiento y testing de altas y bajas frecuencias
-[Lf_train,Hf_train,Lf_test,Hf_test]=train_test_split(Lf,Hf,train_size,tamano);
-
-%Separando X e Y
-
-[X_Lf_train,Y_Lf_train] = train_split(Lf_train,lag,H);
-[X_Hf_train,Y_Hf_train] = train_split(Hf_train,lag,H);
-
-[X_Lf_test,Y_Lf_test] = train_split(Lf_test,lag,H);
-[X_Hf_test,Y_Hf_test] = train_split(Hf_test,lag,H);
-
-csvwrite("X_Lf_train.csv",X_Lf_train);
-csvwrite("Y_Lf_train.csv",Y_Lf_train);
-csvwrite("X_Hf_train.csv",X_Hf_train);
-csvwrite("Y_Hf_train.csv",X_Hf_train);
-
-csvwrite("X_Lf_test.csv",X_Lf_test);
-csvwrite("Y_Lf_test.csv",Y_Lf_test);
-csvwrite("X_Hf_test.csv",X_Hf_test);
-csvwrite("Y_Hf_test.csv",X_Hf_test);
-
+%Grafico ACF  
+%ACF(data,20);
+%==============================================================================%
+h=20;
+lag = [30];
+l = 5;
+array_mnsc = [];
+for ind_lag=1:length(lag)
+  local_msnc = [];
+  for H=1:h
+    %Insertar procesamiento de data
+    [X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test]=procesa_data(data,train_size,l,lag(ind_lag),H);
+    %Insertar ARR y ARX          
+    mnsc=aar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
+    local_msnc(end+1)=mnsc.mnsc;
+  endfor
+  array_mnsc(end+1) = local_msnc;
+endfor
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%% AAR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -73,22 +81,60 @@ csvwrite("Y_Hf_test.csv",X_Hf_test);
 
 %%MLP%%
 %topologias = [40 20; 20 25; 33 24; 20 40; 30 20; 20 20; 20 30; 20 18; 20 19; 21 19];
-topologias = [5 5;2 2];
-iteraciones = 10;
+topologias = [30 30;20 20];
+iteraciones = 1000;
 %Training con HF
-mlp_main(topologias,iteraciones);
+%mlp_main(topologias,iteraciones);
 
 %Training con LF
 %mlp_main(X_LfHf_train,Y_LfHf_train,X_Hf_test,Y_Hf_test,topologias,iteraciones);
 
-%%SVM%%
-%[svm]=svm_func(X_Lf_train,Y_Lf_train,X_Lf_test, Y_Lf_test,train_size,tamano);
+%SVM%
+stepGama=[4,5];
+stepSigma=[4,6];
+a=[1,2];
+b=[9,10];
+baseGama=[2];
+baseSigma=[2];
+H=20;
+lag=3;
+l=2;
+top_svm.mnsc=-999999999999999;
+for ind_Gama=1:length(baseGama)
+	for ind_Sigma=1:length(baseSigma)
+		for ind_sGama= 1:length(stepGama)
+			for ind_sSigma=1:length(stepSigma)
+				for ind_a=1:length(a)		
+					for	ind_b=1:length(b)
+						best_mnsc_local=[];
+						for ind_H=1:H
+							%Procesar datos
+							[X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test]=procesa_data(data,train_size,l,lag,H);
+              disp("process data");
+              fflush(stdout);
+							metricas=svm(a(ind_a),b(ind_b),stepGama(ind_sGama),stepSigma(ind_sSigma),baseGama(ind_Gama),baseSigma(ind_Sigma),X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test,l,H,lag);
+							best_mnsc_local(end+1)=metricas.mnsc;
+              disp("svm listo");  
+              fflush(stdout);
+						endfor
+            disp(a(ind_a));
+            fflush(stdout);
+						if(mean(best_mnsc_local)>mean(top_svm.mnsc))
+						  top_svm.mnsc=mean(best_mnsc_local);
+							top_svm.stepGama=stepGama(ind_sGama);
+							top_svm.stepSigma=stepSigma(ind_sSigma);
+							top_svm.a=a(ind_a);
+							top_svm.b=b(ind_b);
+							top_svm.baseGama=baseGama(ind_Gama);
+							top_svm.baseSigma=stepSigma(ind_Sigma);
+						endif						
+					endfor
+				endfor			
+			endfor
+		endfor
+	endfor
+endfor
 
-%[svm]=svm_func(X_Lf_train,Y_Lf_train,X_Lf_test, Y_Lf_test,train_size,tamano);
-
-%% AR %%
-%Training AR
-%Training LF
 %training_ar(X_Lf_train,Y_Lf_train,"Coeficientes_Lf");
 %Training HF
 %training_ar(X_Hf_train,Y_Hf_train,"Coeficientes_Hf");

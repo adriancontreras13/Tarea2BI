@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 # Created by Octave 4.2.2, Mon Jul 09 12:17:48 2018 GMT <unknown@unknown>
+=======
+# Created by Octave 4.2.2, Wed Jul 11 18:02:09 2018 -04 <francisco@francisco-X555LB>
+>>>>>>> 321fd6503b9ec85d9a92bcd28f63302ca6681a98
 # name: topologia
 # type: matrix
 # rows: 1
 # columns: 2
- 5 5
+ 30 30
 
 
