@@ -1,5 +1,5 @@
-function [Xar,Yar]= test_split(XL_train,lag)
-  l = lag -1;
+function [Xar]= test_split(XL_train,lag)
+  l = lag-1;
   n = length(XL_train);
   m = n-l;
   x = zeros(n,l+1);
@@ -13,6 +13,6 @@ function [Xar,Yar]= test_split(XL_train,lag)
   endfor
   x = x(l+1:n,:);
   x =fliplr(x);
-  Xar=x(:,1:lag-1);
-  Yar=x(:,end);
+  Xar=x;
+  
 end
