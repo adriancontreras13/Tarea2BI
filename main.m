@@ -4,29 +4,12 @@ lag=4;
 data= csvread("daily-minimum-temperatures-in-me.csv");
 data = data(:,2);
 train_size = 0.6;
-l=3;
+l=5;
 H=6;
 autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
 %==============================================================================%
-   
-  for i = 1:l
-    autocorr(i) = autocorrelacion(data,i); 
-  end
-  
-  [intervalo, N]= intervalo_de_confianza(autocorr)
-  
-  
-  figure(1);
-  h = stem(autocorr);
-  hold on
-  line ([0 N], [intervalo(1)  intervalo(1)], "linestyle", "--", "color", "r");
-  line ([0 N], [intervalo(2)  intervalo(2)], "linestyle", "--", "color", "r");
-  hold off
-  xlabel('Lag');
-  ylabel('Autocorrelacion');
-  title("Autocorrelacion vs Lag");
-  grid on
+ACF(data, l); 
 %==============================================================================%
 %Normalizacion de data
 data = data/norm(data);
