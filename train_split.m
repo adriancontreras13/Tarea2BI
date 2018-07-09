@@ -15,4 +15,5 @@ function [Xar,Yar]= train_split(XL_train,lag,h)
   x =fliplr(x);
   Xar=x(:,1:lag);
   Yar=x(:,end);
+  
 end
