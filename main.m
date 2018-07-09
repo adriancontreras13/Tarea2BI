@@ -10,7 +10,7 @@ data=data(1:50);
 
 train_size = 0.6;
 %==============================================================================%
-l=3;
+l=10;
 H=4;
 autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
