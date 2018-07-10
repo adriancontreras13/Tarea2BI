@@ -3,9 +3,6 @@ function [A B]= svm_train(X, Y, sigma, gama)
   K=kernel(X,Y,sigma);
   E=eye(n);
   %E=eye(n,n)/gama;
-  disp(X);
-  disp(size(K));
-  disp(size(E));
   H = K + E;
   mu= inv(H)*ones(n,1);
   V=inv(H)*Y;

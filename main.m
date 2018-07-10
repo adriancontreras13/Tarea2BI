@@ -3,16 +3,17 @@ lag=3;
 %data = load("nuevo.txt");
 data= csvread("daily-minimum-temperatures-in-me.csv");
 data = data(:,2);
+data=data(1:50);
+
 train_size = 0.6;
 l=3;
 H=4;
 autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
-%==============================================================================%
-   
-  for i = 1:l
-    autocorr(i) = autocorrelacion(data,i); 
-  end
+%==============================================================================%   
+for i = 1:l
+  autocorr(i) = autocorrelacion(data,i); 
+end
   
   [intervalo, N]= intervalo_de_confianza(autocorr)
   
@@ -77,6 +78,15 @@ csvwrite("Y_Hf_test.csv",X_Hf_test);
 %Testing
 %testing_ar(X_Lf_test,Y_Lf_test);
 
+[X_Lf_test] = test_split(Lf_train,lag);
+[X_Hf_test] = test_split(Hf_train,lag);
+
+[X_LfHf_test] = concatest(X_Lf_test,X_Hf_test);
+
+[X_Lf_test, Y_Lf_test] = test_split(Lf_test,lag);
+[X_Hf_test, Y_Hf_test] = test_split(Lf_test,lag);
+
+[X_LfHf_test,Y_LfHf_test] = concat(X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
 
 %%MLP%%
 %topologias = [40 20; 20 25; 33 24; 20 40; 30 20; 20 20; 20 30; 20 18; 20 19; 21 19];
@@ -90,6 +100,7 @@ csvwrite("Y_Hf_test.csv",X_Hf_test);
 %%SVM%%
 %[svm]=svm_func(X_Lf_train,Y_Lf_train,X_Lf_test, Y_Lf_test,train_size,tamano);
 
+[svm]=svm_func(X_Lf_train,Y_Lf_train,X_Lf_test, Y_Lf_test,train_size,tamano);
 
 %% AR %%
 %Training AR
@@ -99,4 +110,3 @@ csvwrite("Y_Hf_test.csv",X_Hf_test);
 %training_ar(X_Hf_train,Y_Hf_train,"Coeficientes_Hf");
 %Testing
 %testing_ar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train);
-
