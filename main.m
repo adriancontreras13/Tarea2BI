@@ -1,11 +1,11 @@
 %Parametros
-lag=4;
+lag=3;
 %data = load("nuevo.txt");
 data= csvread("daily-minimum-temperatures-in-me.csv");
 data = data(:,2);
 train_size = 0.6;
 l=3;
-H=6;
+H=4;
 autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
 %==============================================================================%
@@ -41,8 +41,8 @@ h=hankel(data,l);
 [Hf,Lf]=frecuencias(C,r);
 
 %Pruebas, comentar si no se usa 
-%Lf = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20];
-%Hf = [21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40];
+Lf = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20];
+Hf = [21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40];
 
 tamano = size(Hf,2);
 %Entrenamiento y testing de altas y bajas frecuencias
@@ -53,15 +53,17 @@ tamano = size(Hf,2);
 [X_Lf_train,Y_Lf_train] = train_split(Lf_train,lag,H);
 [X_Hf_train,Y_Hf_train] = train_split(Hf_train,lag,H);
 
-[X_LfHf_train,Y_LfHf_train] = concat(X_Lf_train,X_Hf_train,Y_Hf_train);
+[X_Lf_test,Y_Lf_test] = train_split(Lf_test,lag,H);
+[X_Hf_test,Y_Hf_test] = train_split(Hf_test,lag,H);
 
-[X_Lf_test] = test_split(Lf_train,lag);
-[X_Hf_test] = test_split(Hf_train,lag);
+%%%%%%%%%%%%%%%%%%%%%%%%% AAR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-[X_LfHf_test] = concatest(X_Lf_test,X_Hf_test);
-
-
+%training LF
+training_ar(X_Lf_train,Y_Lf_train,"Coeficientes_Lf");
+%Training HF
+training_ar(X_Hf_train,Y_Hf_train,"Coeficientes_Hf");
+%Testing
+testing_ar(X_Lf_test,Y_Lf_test);
 
 
 %%MLP%%
