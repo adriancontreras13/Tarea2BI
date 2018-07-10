@@ -56,14 +56,25 @@ tamano = size(Hf,2);
 [X_Lf_test,Y_Lf_test] = train_split(Lf_test,lag,H);
 [X_Hf_test,Y_Hf_test] = train_split(Hf_test,lag,H);
 
+csvwrite("X_Lf_train.csv",X_Lf_train);
+csvwrite("Y_Lf_train.csv",Y_Lf_train);
+csvwrite("X_Hf_train.csv",X_Hf_train);
+csvwrite("Y_Hf_train.csv",X_Hf_train);
+
+csvwrite("X_Lf_test.csv",X_Lf_test);
+csvwrite("Y_Lf_test.csv",Y_Lf_test);
+csvwrite("X_Hf_test.csv",X_Hf_test);
+csvwrite("Y_Hf_test.csv",X_Hf_test);
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%% AAR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %training LF
-training_ar(X_Lf_train,Y_Lf_train,"Coeficientes_Lf");
+%training_ar("Lf");
 %Training HF
-training_ar(X_Hf_train,Y_Hf_train,"Coeficientes_Hf");
+%training_ar("Hf");
 %Testing
-testing_ar(X_Lf_test,Y_Lf_test);
+%testing_ar(X_Lf_test,Y_Lf_test);
 
 
 %%MLP%%
