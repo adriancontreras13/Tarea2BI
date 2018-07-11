@@ -2,23 +2,23 @@
 arreglo_hankel=[100,500,1000,1500];
 arreglo_h=[1,2,3];
 arreglo_lag=[1,2,3];
-lag=3;
-%data = load("nuevo.txt");
+lag=50;
 data= csvread("daily-minimum-temperatures-in-me.csv");
 data = data(:,2);
-data=data(1:50);
+%data=data(1:50);
 
 train_size = 0.6;
 %==============================================================================%
-l=3;
+l=2;
 H=4;
 autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
 %==============================================================================% 
 
 %Grafico ACF  
-ACF(data,l);
+ACF(data,lag);
 %==============================================================================%
+
 %Normalizacion de data
 data = data/norm(data);
 
@@ -53,12 +53,12 @@ tamano = size(Hf,2);
 csvwrite("X_Lf_train.csv",X_Lf_train);
 csvwrite("Y_Lf_train.csv",Y_Lf_train);
 csvwrite("X_Hf_train.csv",X_Hf_train);
-csvwrite("Y_Hf_train.csv",X_Hf_train);
+csvwrite("Y_Hf_train.csv",Y_Hf_train);
 
 csvwrite("X_Lf_test.csv",X_Lf_test);
 csvwrite("Y_Lf_test.csv",Y_Lf_test);
 csvwrite("X_Hf_test.csv",X_Hf_test);
-csvwrite("Y_Hf_test.csv",X_Hf_test);
+csvwrite("Y_Hf_test.csv",Y_Hf_test);
 
 
 
