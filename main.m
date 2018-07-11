@@ -78,29 +78,19 @@ csvwrite("Y_Hf_test.csv",X_Hf_test);
 %Testing
 %testing_ar(X_Lf_test,Y_Lf_test);
 
-[X_Lf_test] = test_split(Lf_train,lag);
-[X_Hf_test] = test_split(Hf_train,lag);
-
-[X_LfHf_test] = concatest(X_Lf_test,X_Hf_test);
-
-[X_Lf_test, Y_Lf_test] = test_split(Lf_test,lag);
-[X_Hf_test, Y_Hf_test] = test_split(Lf_test,lag);
-
-[X_LfHf_test,Y_LfHf_test] = concat(X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
-
 %%MLP%%
 %topologias = [40 20; 20 25; 33 24; 20 40; 30 20; 20 20; 20 30; 20 18; 20 19; 21 19];
-%topologias = [5 5;2 2];
-%iteraciones = 100;
+topologias = [5 5;2 2];
+iteraciones = 10;
 %Training con HF
-%mlp_main(X_Hf_train',Y_Hf_train',X_Hf_test', Y_Hf_test',topologias,iteraciones);
+mlp_main(topologias,iteraciones);
 %Training con LF
 %mlp_main(X_LfHf_train,Y_LfHf_train,X_Hf_test,Y_Hf_test,topologias,iteraciones);
 
 %%SVM%%
 %[svm]=svm_func(X_Lf_train,Y_Lf_train,X_Lf_test, Y_Lf_test,train_size,tamano);
 
-[svm]=svm_func(X_Lf_train,Y_Lf_train,X_Lf_test, Y_Lf_test,train_size,tamano);
+%[svm]=svm_func(X_Lf_train,Y_Lf_train,X_Lf_test, Y_Lf_test,train_size,tamano);
 
 %% AR %%
 %Training AR
