@@ -1,19 +1,9 @@
-function [AAR]= aar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train)
-  n = length(XL_train);
-  m = n-l;
-  x = zeros(n,l+1);
-  for i=1:l+1
-    j=i;
-    k=1;
-    for p=j:n    
-      x(p,i)=XL_train(k);
-      k=k+1;    
-    endfor
-  endfor
-  disp(x);
-  x = x(l+1:n,:);
-  x =fliplr(x);
-  Xar=x(:,1:l);
-  Yar=x(:,l+1);
-  a=pinv(Xar)*Yar;
+function [AAR]= aar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test)
+  a_lf = training_ar(X_Lf_train,Y_Lf_train);
+  a_hf = training_ar(X_Hf_train,Y_Hf_train);
+  y_lf = test_ar(X_Lf_test,a_lf);
+  y_hf = test_ar(X_Hf_test,a_hf);
+  y_aditive = y_lf + y_hf;
+  y_aditive_test = Y_Hf_test + Y_Lf_test;
+  [metricas] = calculo_metricas(y_aditive,y_aditive_test);
 end

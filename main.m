@@ -2,21 +2,21 @@
 arreglo_hankel=[100,500,1000,1500];
 arreglo_h=[1,2,3];
 arreglo_lag=[1,2,3];
-lag=50;
+lag=30;
 data= csvread("daily-minimum-temperatures-in-me.csv");
 data = data(:,2);
 %data=data(1:50);
 
-train_size = 0.6;
+train_size = 0.8;
 %==============================================================================%
-l=2;
-H=4;
-autocovar = autocovarianza(data,l);
+l=500;
+H=1;
+%autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
 %==============================================================================% 
 
 %Grafico ACF  
-ACF(data,lag);
+%ACF(data,lag);
 %==============================================================================%
 
 %Normalizacion de data
@@ -50,15 +50,15 @@ tamano = size(Hf,2);
 [X_Lf_test,Y_Lf_test] = train_split(Lf_test,lag,H);
 [X_Hf_test,Y_Hf_test] = train_split(Hf_test,lag,H);
 
-csvwrite("X_Lf_train.csv",X_Lf_train);
-csvwrite("Y_Lf_train.csv",Y_Lf_train);
-csvwrite("X_Hf_train.csv",X_Hf_train);
-csvwrite("Y_Hf_train.csv",Y_Hf_train);
+%csvwrite("X_Lf_train.csv",X_Lf_train);
+%csvwrite("Y_Lf_train.csv",Y_Lf_train);
+%csvwrite("X_Hf_train.csv",X_Hf_train);
+%csvwrite("Y_Hf_train.csv",Y_Hf_train);
 
-csvwrite("X_Lf_test.csv",X_Lf_test);
-csvwrite("Y_Lf_test.csv",Y_Lf_test);
-csvwrite("X_Hf_test.csv",X_Hf_test);
-csvwrite("Y_Hf_test.csv",Y_Hf_test);
+%csvwrite("X_Lf_test.csv",X_Lf_test);
+%csvwrite("Y_Lf_test.csv",Y_Lf_test);
+%csvwrite("X_Hf_test.csv",X_Hf_test);
+%csvwrite("Y_Hf_test.csv",Y_Hf_test);
 
 
 
@@ -73,10 +73,10 @@ csvwrite("Y_Hf_test.csv",Y_Hf_test);
 
 %%MLP%%
 %topologias = [40 20; 20 25; 33 24; 20 40; 30 20; 20 20; 20 30; 20 18; 20 19; 21 19];
-topologias = [5 5;2 2];
-iteraciones = 10;
+topologias = [30 30;20 20];
+iteraciones = 1000;
 %Training con HF
-mlp_main(topologias,iteraciones);
+%mlp_main(topologias,iteraciones);
 
 %Training con LF
 %mlp_main(X_LfHf_train,Y_LfHf_train,X_Hf_test,Y_Hf_test,topologias,iteraciones);
@@ -89,6 +89,7 @@ mlp_main(topologias,iteraciones);
 %% AR %%
 %Training AR
 %Training LF
+aar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
 %training_ar(X_Lf_train,Y_Lf_train,"Coeficientes_Lf");
 %Training HF
 %training_ar(X_Hf_train,Y_Hf_train,"Coeficientes_Hf");
