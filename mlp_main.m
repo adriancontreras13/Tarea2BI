@@ -1,4 +1,4 @@
-function [multilayer_perceptron] = mlp_main(topologias,iteraciones)
+function [metricas] = mlp_main(topologias,iteraciones)
   %Entradas y salidas de alta frecuencia
   x_train_hf= csvread("X_Hf_train.csv");
   y_train_hf=csvread("Y_Hf_train.csv");
@@ -15,7 +15,7 @@ function [multilayer_perceptron] = mlp_main(topologias,iteraciones)
 
   mlp_save_parameters(x_train_hf',y_train_hf',x_test_hf',y_test_hf',topologias,iteraciones,"_hf");
   mlp_save_parameters(x_train_lf',y_train_lf',x_test_lf',y_test_lf',topologias,iteraciones,"_lf");
-  mlp_additive_forecasting(x_test_hf',y_test_hf',x_test_lf',y_test_lf');
+  metricas=mlp_additive_forecasting(x_test_hf',y_test_hf',x_test_lf',y_test_lf');
   %w = load("mejorPeso.txt");
   %disp(w);
   %mlpt = mlp_test(x_test,y_test,w);

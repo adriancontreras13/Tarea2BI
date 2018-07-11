@@ -1,4 +1,4 @@
-function [parameters] = mlp_additive_forecasting(x_test_hf,y_test_hf,x_test_lf,y_test_lf)
+function [metricas] = mlp_additive_forecasting(x_test_hf,y_test_hf,x_test_lf,y_test_lf)
   load("mejorPesoMLP_hf.txt");
   W_hf=bestWTrainGlobal;
   load("mejorTopologiaMLP_hf.txt");
@@ -11,5 +11,5 @@ function [parameters] = mlp_additive_forecasting(x_test_hf,y_test_hf,x_test_lf,y
   y_lf=mlp_test_fp(x_test_lf,W_lf);
   y_additive=y_hf+y_lf;
   y_additive_test=y_test_hf+y_test_lf;
-  [metricas]=calculo_metricas(y_additive,y_additive_test);
+  metricas=calculo_metricas(y_additive,y_additive_test);
 endfunction
