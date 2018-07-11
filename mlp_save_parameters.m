@@ -1,4 +1,4 @@
-function [parameters] = mlp_save_parameters(x_train,y_train,x_test,y_test,topologias,iteraciones)
+function [parameters] = mlp_save_parameters(x_train,y_train,x_test,y_test,topologias,iteraciones,frecuencia)
   mlp.MaxIter=iteraciones;
   mlp.mu=1e-3;
   run = 10;
@@ -18,8 +18,6 @@ function [parameters] = mlp_save_parameters(x_train,y_train,x_test,y_test,topolo
     for j = 1:run
       mlp.W=mlp_inic_w(size(x_train,1),size(y_train,1),mlp.HLayer);
       mlp=mlp_train(x_train,y_train,mlp);
-      fprintf("\n");
-      disp(mlp.W);
       if mlp.mse(end) < bestMse
         bestMse = mlp.mse(end);
         bestArrayMse = mlp.mse;
@@ -32,16 +30,17 @@ function [parameters] = mlp_save_parameters(x_train,y_train,x_test,y_test,topolo
       bestGlobalArrayTrainMse = bestArrayMse;
       bestParameters = mlpt;
       bestWTrainGlobal = bestWTrain;
-      save("mejorPesoMLP.txt","bestWTrainGlobal");
+      nombre=strcat("mejorPesoMLP",frecuencia,".txt");
+      save(nombre,"bestWTrainGlobal");
     %  csvwrite("mejorPesoMLP.csv",bestWtrain);
       indexBestTopologia = i;
       topologia = [topologias(indexBestTopologia,1) topologias(indexBestTopologia,2)];
-      save("mejorTopologiaMLP.txt","topologia");
+      nombre=strcat("mejorTopologiaMLP",frecuencia,".txt");
+      save(nombre,"topologia");
     %  csvwrite("mejorTopologiaMLP.csv",topologia);
     endif
     bestMse = 99999;
     bestArrayMse = [];
     bestWtrain = [];
-    ArrayMseTopologias(end+1) = mlpt.mse;
   endfor
 endfunction

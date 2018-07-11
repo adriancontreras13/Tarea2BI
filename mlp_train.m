@@ -8,5 +8,4 @@ function [mlp]=mlp_train(xe,ye,mlp)
 [mlp.W mse(iter)]=mlp_upd_w(ye,z,mlp.W,mlp.mu);
 end
 mlp.mse=mse;
-
 endfunction

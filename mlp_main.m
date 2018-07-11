@@ -13,7 +13,8 @@ function [multilayer_perceptron] = mlp_main(topologias,iteraciones)
   
   %Ingresar lectura de entradas concatenadas
 
-  mlp_save_parameters(x_train_hf',y_train_hf',x_test_hf',y_test_hf',topologias,iteraciones);
+  mlp_save_parameters(x_train_hf',y_train_hf',x_test_hf',y_test_hf',topologias,iteraciones,"_hf");
+  mlp_save_parameters(x_train_lf',y_train_lf',x_test_lf',y_test_lf',topologias,iteraciones,"_lf");
   %w = load("mejorPeso.txt");
   %disp(w);
   %mlpt = mlp_test(x_test,y_test,w);

@@ -1,4 +1,7 @@
 %Parametros
+arreglo_hankel=[100,500,1000,1500];
+arreglo_h=[1,2,3];
+arreglo_lag=[1,2,3];
 lag=3;
 %data = load("nuevo.txt");
 data= csvread("daily-minimum-temperatures-in-me.csv");
@@ -32,6 +35,7 @@ end
 %Normalizacion de data
 data = data/norm(data);
 
+
 %Matriz de Hankel
 h=hankel(data,l);
 
@@ -42,10 +46,12 @@ h=hankel(data,l);
 [Hf,Lf]=frecuencias(C,r);
 
 %Pruebas, comentar si no se usa 
-Lf = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20];
-Hf = [21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40];
+%Lf = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20];
+%Hf = [21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40];
+
 
 tamano = size(Hf,2);
+
 %Entrenamiento y testing de altas y bajas frecuencias
 [Lf_train,Hf_train,Lf_test,Hf_test]=train_test_split(Lf,Hf,train_size,tamano);
 
