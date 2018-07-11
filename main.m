@@ -1,6 +1,6 @@
 %Parametros
-arreglo_hankel=[100,500,1000,1500];
-arreglo_h=[1,2,3];
+arreglo_hankel=[2,3];
+arreglo_h=[1,2];
 arreglo_lag=[1,2,3];
 lag=30;
 data= csvread("daily-minimum-temperatures-in-me.csv");
@@ -18,37 +18,35 @@ H=1;
 %Grafico ACF  
 %ACF(data,lag);
 %==============================================================================%
-
-%Normalizacion de data
-data = data/norm(data);
-
-
-%Matriz de Hankel
-h=hankel(data,l);
-
-%Descomposicion de valores singulares
-[C,r]=svalues(h);
-
-%Altas frecuencias y Bajas frecuencias(XH Y XL)
-[Hf,Lf]=frecuencias(C,r);
-
-%Pruebas, comentar si no se usa 
-%Lf = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20];
-%Hf = [21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40];
-
-
-tamano = size(Hf,2);
-
-%Entrenamiento y testing de altas y bajas frecuencias
-[Lf_train,Hf_train,Lf_test,Hf_test]=train_test_split(Lf,Hf,train_size,tamano);
-
-%Separando X e Y
-
-[X_Lf_train,Y_Lf_train] = train_split(Lf_train,lag,H);
-[X_Hf_train,Y_Hf_train] = train_split(Hf_train,lag,H);
-
-[X_Lf_test,Y_Lf_test] = train_split(Lf_test,lag,H);
-[X_Hf_test,Y_Hf_test] = train_split(Hf_test,lag,H);
+top_global.L=-1;
+top_global.h=-1;
+top_global.mnsc=-999999999999999;
+for ind_L=arreglo_hankel(1):arreglo_hankel(2)
+  for ind_H=arreglo_h(1):arreglo_h(2)
+    for ind_Lag=1:length(arreglo_lag)
+      mnsc_lag_local=[];
+      for i=1:ind_H
+        H=i;
+        lag=arreglo_lag(ind_Lag);
+        l=ind_L;
+        %Insertar procesamiento de data
+        [X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test]=procesa_data(data,train_size,l,lag,H);
+        fprintf("\n\nConfiguracion: \nH: %d \nlag: %d \nl: %d",H,lag,l);
+        %Insertar ARR y ARX          
+        mnsc=aar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
+        mnsc_lag_local(end+1)=mnsc.mnsc;
+        %Insertar MLP y MLPX
+        
+        %insertar SVM SVMX
+      endfor
+      if(mean(mnsc_lag_local)>mean(top_global.mnsc))
+        top_global.mnsc=mean(mnsc_lag_local);
+        top_global.L=l;
+        top_global.h=H;
+      endif
+    endfor
+  endfor
+endfor
 
 %csvwrite("X_Lf_train.csv",X_Lf_train);
 %csvwrite("Y_Lf_train.csv",Y_Lf_train);
@@ -86,10 +84,6 @@ iteraciones = 1000;
 
 %[svm]=svm_func(X_Lf_train,Y_Lf_train,X_Lf_test, Y_Lf_test,train_size,tamano);
 
-%% AR %%
-%Training AR
-%Training LF
-aar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
 %training_ar(X_Lf_train,Y_Lf_train,"Coeficientes_Lf");
 %Training HF
 %training_ar(X_Hf_train,Y_Hf_train,"Coeficientes_Hf");
