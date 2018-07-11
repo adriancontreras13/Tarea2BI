@@ -90,6 +90,7 @@ topologias = [5 5;2 2];
 iteraciones = 10;
 %Training con HF
 mlp_main(topologias,iteraciones);
+
 %Training con LF
 %mlp_main(X_LfHf_train,Y_LfHf_train,X_Hf_test,Y_Hf_test,topologias,iteraciones);
 
