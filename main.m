@@ -1,12 +1,14 @@
 %Parametros
-arreglo_hankel=[2,3];
-arreglo_h=[1,2];
+%Rango de las L de hankel
+arreglo_hankel=[2,4];
+%Rango de las h del Horizonte
+arreglo_h=[5,10];
+%Arreglo de lags
 arreglo_lag=[1,2,3];
-lag=30;
-data= csvread("daily-minimum-temperatures-in-me.csv");
+%Datasets
+data= csvread("mean-daily-temperature-fisher-ri.csv");
+%data= csvread("daily-minimum-temperatures-in-me.csv");
 data = data(:,2);
-%data=data(1:50);
-
 train_size = 0.8;
 %==============================================================================%
 l=500;
@@ -14,10 +16,6 @@ H=1;
 %autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
 %==============================================================================% 
-
-%Grafico ACF  
-%ACF(data,lag);
-%==============================================================================%
 top_global.L=-1;
 top_global.h=-1;
 top_global.mnsc=-999999999999999;
@@ -31,7 +29,6 @@ for ind_L=arreglo_hankel(1):arreglo_hankel(2)
         l=ind_L;
         %Insertar procesamiento de data
         [X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test]=procesa_data(data,train_size,l,lag,H);
-        fprintf("\n\nConfiguracion: \nH: %d \nlag: %d \nl: %d",H,lag,l);
         %Insertar ARR y ARX          
         mnsc=aar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
         mnsc_lag_local(end+1)=mnsc.mnsc;
@@ -47,6 +44,13 @@ for ind_L=arreglo_hankel(1):arreglo_hankel(2)
     endfor
   endfor
 endfor
+
+disp(top_global);
+
+%==============================================================================%
+%Grafico ACF  
+ACF(data,20);
+%==============================================================================%
 
 %csvwrite("X_Lf_train.csv",X_Lf_train);
 %csvwrite("Y_Lf_train.csv",Y_Lf_train);
