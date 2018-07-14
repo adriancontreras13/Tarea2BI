@@ -84,18 +84,18 @@ iteraciones = 1000;
 %mlp_main(X_LfHf_train,Y_LfHf_train,X_Hf_test,Y_Hf_test,topologias,iteraciones);
 
 %SVM%
-stepGama=[4,5,6];
-stepSigma=[4,6,8];
-a=[1,2,3];
-b=[9,10,11];
-baseGama=[2,10];
-baseSigma=[2,10];
-H=10;
+stepGama=[4,5];
+stepSigma=[4,6];
+a=[1,2];
+b=[9,10];
+baseGama=[2];
+baseSigma=[2];
+H=20;
 lag=3;
 l=2;
 top_svm.mnsc=-999999999999999;
-for ind_Gama=baseGama(1):8:baseGama(2)
-	for ind_Sigma=baseSigma(1):8:baseSigma(2)
+for ind_Gama=1:length(baseGama)
+	for ind_Sigma=1:length(baseSigma)
 		for ind_sGama= 1:length(stepGama)
 			for ind_sSigma=1:length(stepSigma)
 				for ind_a=1:length(a)		
