@@ -1,14 +1,4 @@
-function [svm] = svm_func(X_train,Y_Train,X_test, Y_test,train_size,n)
-  %Se divide la data de training y la de testing  
-	stepGama=1;
-	stepSigma=3;
-	a=-1;
-	b=5;
-	baseGama=[10 ];
-	baseSigma=[10 ]; 
-	%
- %%Aqui comienza el reciclaje descarado de la tarea 1
-	%
+function [besty] = svm_func(a,b,stepGama,stepSigma,baseGama,stepSigma,X_train,Y_train,X_test,Y_test)
   for i=a:stepSigma : b
      for j = a: stepGama : b
       grid(end+1,:)=[(baseGama(1))^j (baseSigma(1))^(i)]; 
@@ -31,6 +21,5 @@ function [svm] = svm_func(X_train,Y_Train,X_test, Y_test,train_size,n)
       Besterr=Err;
       besty=y;
     endif 
-  endfor
-
-endfunction
+  endfor 
+end
