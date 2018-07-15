@@ -54,20 +54,10 @@ disp(top_global);
 %ACF(data,20);
 %==============================================================================%
 h=20;
-lag = [30];
+lag = [30 32];
 l = 5;
-array_mnsc = [];
-for ind_lag=1:length(lag)
-  local_msnc = [];
-  for H=1:h
-    %Insertar procesamiento de data
-    [X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test]=procesa_data(data,train_size,l,lag(ind_lag),H);
-    %Insertar ARR y ARX          
-    mnsc=aar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
-    local_msnc(end+1)=mnsc.mnsc;
-  endfor
-  array_mnsc(end+1) = local_msnc;
-endfor
+modelo_arr(data,train_size,h,l,lag);
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%% AAR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
