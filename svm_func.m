@@ -5,16 +5,14 @@ function [besty] = svm_func(a,b,stepGama,stepSigma,baseGama,baseSigma,X_train,Y_
       grid(end+1,:)=[(baseGama(1))^j (baseSigma(1))^(i)]; 
      endfor
   endfor
-  disp("grid");disp(length(grid));
-  fflush(stdout);
   Besterr= 200;
   for j=1:length(grid)
     g= grid(j,1);
     s= grid(j,2);
     %se inicializan los valores de alpha y beta
-    [alpha beta] = svm_train(X_train,Y_train,s,g);
-    disp("TRAIN");
+    disp("T");
     fflush(stdout);
+    [alpha beta] = svm_train(X_train,Y_train,s,g);
     [y]=svm_test(alpha, beta,X_train,X_test,s);
     Err=mean((Y_test-y).^2);
     Errors(end+1) = Err;
