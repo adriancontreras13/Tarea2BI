@@ -14,6 +14,7 @@ train_size = 0.8;
 l=500;
 H=1;
 %lag = 80;
+
 %autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
 %==============================================================================%
@@ -31,11 +32,11 @@ lag=[62,63,64,65];
 
 %modelo_arx(data,train_size,h,l,lag);
 
-modelo_mlp(data,train_size,h,l,lag);
+%modelo_mlp(data,train_size,h,l,lag);
 
 %modelo_mlpx(data,train_size,h,l,lag);
 
-%modelo_svm(data,train_size,h,l,lag);
+modelo_svm(data,train_size,h,l,lag);
 
 %modelo_svmx(data,train_size,h,l,lag);
 
