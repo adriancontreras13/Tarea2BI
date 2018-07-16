@@ -7,12 +7,12 @@ y=1;
  
     alpha=0.005;
     N=length(autocorr);
-    disp(N);
+    
     u=-tinv(alpha/2,N-1);
     x_bar=mean(autocorr);
     sigma=(std(autocorr));
     intervalo=[-(x_bar-u*sigma/sqrt(N)),x_bar-u*sigma/sqrt(N)];
-    disp(intervalo);
+    
   
   figure(1);
   stem(autocorr,'fill','b');

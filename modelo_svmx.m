@@ -14,13 +14,13 @@ function [modelo]= modelo_svmx(data,train_size,h,l,lag)
   mejor_metrica.h= 0;
   mejor_metrica.y_obtenido = [];
   mejor_metrica.y_esperado = [];
-  graficoid =6;
+  graficoid =7;
   array_mnsc = [];
   for ind_lag=1:length(lag)
     local_msnc = [];
     for H=1:h
       %Insertar procesamiento de data
-      [X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test]=procesa_data(data,train_size,l,lag(ind_lag),H);
+      [X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test]=procesa_data2(data,train_size,l,lag(ind_lag),H);
       %Insertar ARR y ARX          
       mnsc=svm(a,b,stepGama,stepSigma,baseGama,baseSigma,X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
       if(mnsc.mnsc >mejor_metrica.mnsc)
@@ -37,9 +37,9 @@ function [modelo]= modelo_svmx(data,train_size,h,l,lag)
     array_mnsc = [array_mnsc;local_msnc];
   endfor
 
-  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"Modelo SVM: ");
+  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"Modelo SVMX: ");
   %Grafico obtenido vs esperado
-  titulo=" (SVM)";
+  titulo=" (SVMX)";
   graficoid= graficoid+10;
   plotObvsEsp(mejor_metrica.y_esperado,mejor_metrica.y_obtenido,titulo,graficoid);
   
