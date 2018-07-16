@@ -2,7 +2,7 @@ function [] = Linear_fit(x,y,titulo,id_grafico)
 
   m = length(x);
   X = [ones(m, 1) x];
-  theta = ((pinv(X'*X))*X'*y);
+  theta = ((pinv(X*X))*X*y);
   
   figure(id_grafico);
   plot(x,y,"g*");
