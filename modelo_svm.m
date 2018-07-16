@@ -1,4 +1,4 @@
-function [modelo]= modelo_svmx(data,train_size,h,l,lag)
+function [modelo]= modelo_svm(data,train_size,h,l,lag)
   stepGama=4;
   stepSigma=4;
   a=1;
@@ -37,7 +37,7 @@ function [modelo]= modelo_svmx(data,train_size,h,l,lag)
     array_mnsc = [array_mnsc;local_msnc];
   endfor
 
-  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"Modelo SVM: ");
+  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"SVM");
   %Grafico obtenido vs esperado
   titulo=" (SVM)";
   graficoid= graficoid+10;

@@ -37,7 +37,7 @@ function [modelo]= modelo_svmx(data,train_size,h,l,lag)
     array_mnsc = [array_mnsc;local_msnc];
   endfor
 
-  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"Modelo SVMX: ");
+  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"VMX");
   %Grafico obtenido vs esperado
   titulo=" (SVMX)";
   graficoid= graficoid+10;
