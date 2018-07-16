@@ -16,7 +16,7 @@ H=1;
 lag = 80;
 %autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
-%==============================================================================% 
+%==============================================================================%
 %mejores_parametros(data,train_size,lag,arreglo_hankel,arreglo_h);
 %==============================================================================%
 h=20;
@@ -27,11 +27,11 @@ l = 2;
 %ACF(data,lag);
 %==============================================================================%
 lag=[62,63,64,65];
-modelo_arr(data,train_size,h,l,lag);
+%modelo_arr(data,train_size,h,l,lag);
 
 %modelo_arx(data,train_size,h,l,lag);
 
-%modelo_mlp(data,train_size,h,l,lag);
+modelo_mlp(data,train_size,h,l,lag);
 
 %modelo_mlpx(data,train_size,h,l,lag);
 
