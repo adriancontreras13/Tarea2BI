@@ -6,14 +6,15 @@ arreglo_h=[2,7];
 %Arreglo de lags
 arreglo_lag=[1,2,3];
 %Datasets
-data= csvread("mean-daily-temperature-fisher-ri.csv");
-%data= csvread("daily-minimum-temperatures-in-me.csv");
+%data= csvread("mean-daily-temperature-fisher-ri.csv");
+data= csvread("daily-minimum-temperatures-in-me.csv");
 data = data(:,2);
-data= data(1:500);
+%data= data(1:500);
 train_size = 0.8;
 %==============================================================================%
 l=500;
 H=1;
+lag = 40;
 %autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
 %==============================================================================% 
@@ -51,7 +52,7 @@ disp(top_global);
 #}
 %==============================================================================%
 %Grafico ACF  
-%ACF(data,20);
+ACF(data,lag);
 %==============================================================================%
 h=20;
 lag = [30];

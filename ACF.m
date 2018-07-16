@@ -1,10 +1,13 @@
-function [] = ACF(data, l)
-    for i = 1:l
-    autocorr(i) = autocorrelacion(data,i);
-  end
-  
-  alpha=0.05;
+function [] = ACF(data,lag)
+    autocorr = [];
+    for i = 1:lag
+      autocorr = [autocorr autocorrelacion(data,i)];
+    end
+y=1; 
+ 
+    alpha=0.005;
     N=length(autocorr);
+    disp(N);
     u=-tinv(alpha/2,N-1);
     x_bar=mean(autocorr);
     sigma=(std(autocorr));
@@ -12,22 +15,12 @@ function [] = ACF(data, l)
     disp(intervalo);
   
   figure(1);
-  h = stem(autocorr);
+  stem(autocorr,'fill','b');
   hold on
   line ([0 N], [intervalo(1) intervalo(1)], "linestyle", "--", "color", "r");
   line ([0 N], [intervalo(2) intervalo(2)], "linestyle", "--", "color", "r");
   hold off
-  xlabel('LAG');
-  ylabel('Autocorrelacion');
-  title("LAG vs Autocorrelacion");
-  grid on
-  
-  figure(1);
-  h = stem(autocorr);
-  hold on
-  line ([0 N], [intervalo(1) intervalo(1)], "linestyle", "--", "color", "r");
-  line ([0 N], [intervalo(2) intervalo(2)], "linestyle", "--", "color", "r");
-  hold off
+  set(gca, 'XLim', [1.0 20.0]);
   xlabel('LAG');
   ylabel('Autocorrelacion');
   title("LAG vs Autocorrelacion");
