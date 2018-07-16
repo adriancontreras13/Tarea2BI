@@ -1,10 +1,10 @@
 %Parametros
 %Rango de las L de hankel
-arreglo_hankel=[2,7];
+arreglo_hankel=[2,4,6,8,10,15,20,30,40,50];
 %Rango de las h del Horizonte
-arreglo_h=[2,7];
+arreglo_h=[20];
 %Arreglo de lags
-arreglo_lag=[1,2,3];
+arreglo_lag=[2,4,6,8,10,15,20,25,30,35,40,45,50,60,64,70,80];
 %Datasets
 data= csvread("mean-daily-temperature-fisher-ri.csv");
 %data= csvread("daily-minimum-temperatures-in-me.csv");
