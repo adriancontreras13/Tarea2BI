@@ -36,5 +36,7 @@ function [modelo]= modelo_arx(data,train_size,h,l,lag)
   titulo=" (ARX)";
   graficoid= graficoid+10;
   plotObvsEsp(mejor_metrica.y_esperado,mejor_metrica.y_obtenido,titulo,graficoid);
-  
+  %Grafico Linear Fit
+  graficoid = graficoid+10;
+  Linear_fit(mejor_metrica.y_obtenido,mejor_metrica.y_esperado,titulo,graficoid);
 end

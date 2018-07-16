@@ -38,5 +38,8 @@ function [modelo]= modelo_svmx(data,train_size,h,l,lag)
   titulo=" (MLP)";
   graficoid= graficoid+10;
   plotObvsEsp(mejor_metrica.y_esperado,mejor_metrica.y_obtenido,titulo,graficoid);
+  %Grafico de Linear Fit
+  graficoid = graficoid+10;
+  Linear_fit(mejor_metrica.y_obtenido,mejor_metrica.y_esperado,titulo,graficoid);
   
 end

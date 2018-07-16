@@ -25,4 +25,5 @@ y=1;
   ylabel('Autocorrelacion');
   title("Autocorrelacion vs LAG");
   grid on
+  print -djpg ACF.jpg
 endfunction

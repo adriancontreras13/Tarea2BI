@@ -10,4 +10,6 @@ function [titulo]=plotObvsEsp(y_esperado,y_obtenido,titulo,id_grafico)
   title(strcat("Grafico Datos normalizados vs Tiempo ",titulo));
   xlabel ("Tiempo (Dias)");
   ylabel ("Valores Normalizados");
+  grid on
+  print -djpg title.jpg
 endfunction
