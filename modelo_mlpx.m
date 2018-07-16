@@ -15,6 +15,7 @@ function [modelo]= modelo_mlpx(data,train_size,h,l,lag)
   for ind_lag=1:length(lag)
     local_msnc = [];
     for H=1:h
+      disp(H);
       %Insertar procesamiento de data
       disp(h);
       [X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test]=procesa_data2(data,train_size,l,lag(ind_lag),H);
