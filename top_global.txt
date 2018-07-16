@@ -1,0 +1,28 @@
+# Created by Octave 4.2.2, Mon Jul 16 14:58:27 2018 -04 <francisco@francisco-HP-550>
+# name: top_global
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 4
+# name: L
+# type: scalar
+2
+
+
+# name: h
+# type: scalar
+20
+
+
+# name: lag
+# type: scalar
+64
+
+
+# name: mnsc
+# type: scalar
+0.6077375069832791
+
+
+
+

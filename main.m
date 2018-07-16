@@ -1,15 +1,14 @@
 %Parametros
 %Rango de las L de hankel
-arreglo_hankel=[2,7];
+arreglo_hankel=[2,4,6,8,10,15,20,30,40,50];
 %Rango de las h del Horizonte
-arreglo_h=[2,7];
+arreglo_h=[20];
 %Arreglo de lags
-arreglo_lag=[1,2,3];
+arreglo_lag=[2,4,6,8,10,15,20,25,30,35,40,45,50,60,64,70,80];
 %Datasets
 %data= csvread("mean-daily-temperature-fisher-ri.csv");
 data= csvread("daily-minimum-temperatures-in-me.csv");
 data = data(:,2);
-%data= data(1:500);
 train_size = 0.8;
 %==============================================================================%
 l=500;
@@ -18,58 +17,17 @@ lag = 40;
 %autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
 %==============================================================================% 
-#{
-top_global.L=-1;
-top_global.h=-1;
-top_global.mnsc=-999999999999999;
-for ind_L=arreglo_hankel(1):arreglo_hankel(2)
-  for ind_H=arreglo_h(1):arreglo_h(2)
-    for ind_Lag=1:length(arreglo_lag)
-      mnsc_lag_local=[];
-      for i=1:ind_H
-        H=i;
-        lag=arreglo_lag(ind_Lag);
-        l=ind_L;
-        %Insertar procesamiento de data
-        [X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test]=procesa_data(data,train_size,l,lag,H);
-        %Insertar ARR y ARX          
-        mnsc=aar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
-        mnsc_lag_local(end+1)=mnsc.mnsc;
-        %Insertar MLP y MLPX
-        
-        %insertar SVM SVMX
-      endfor
-      if(mean(mnsc_lag_local)>mean(top_global.mnsc))
-        top_global.mnsc=mean(mnsc_lag_local);
-        top_global.L=l;
-        top_global.h=H;
-      endif
-    endfor
-  endfor
-endfor
-
-disp(top_global);
-#}
+%mejores_parametros(data,train_size,arreglo_lag,arreglo_hankel,arreglo_h);
 %==============================================================================%
 %Grafico ACF  
 ACF(data,lag);
 %==============================================================================%
 h=20;
-lag = [30];
-l = 5;
-array_mnsc = [];
-for ind_lag=1:length(lag)
-  local_msnc = [];
-  for H=1:h
-    %Insertar procesamiento de data
-    [X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test]=procesa_data(data,train_size,l,lag(ind_lag),H);
-    %Insertar ARR y ARX          
-    mnsc=aar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
-    local_msnc(end+1)=mnsc.mnsc;
-  endfor
-  array_mnsc(end+1) = local_msnc;
-endfor
+lag = [62 64 66];
+l = 2;
+%modelo_arr(data,train_size,h,l,lag);
 
+modelo_arx(data,train_size,h,l,lag);
 
 %%%%%%%%%%%%%%%%%%%%%%%%% AAR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -91,50 +49,8 @@ iteraciones = 1000;
 %mlp_main(X_LfHf_train,Y_LfHf_train,X_Hf_test,Y_Hf_test,topologias,iteraciones);
 
 %SVM%
-stepGama=[4,5];
-stepSigma=[4,6];
-a=[1,2];
-b=[9,10];
-baseGama=[2];
-baseSigma=[2];
-H=20;
-lag=3;
-l=2;
-top_svm.mnsc=-999999999999999;
-for ind_Gama=1:length(baseGama)
-	for ind_Sigma=1:length(baseSigma)
-		for ind_sGama= 1:length(stepGama)
-			for ind_sSigma=1:length(stepSigma)
-				for ind_a=1:length(a)		
-					for	ind_b=1:length(b)
-						best_mnsc_local=[];
-						for ind_H=1:H
-							%Procesar datos
-							[X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test]=procesa_data(data,train_size,l,lag,H);
-              disp("process data");
-              fflush(stdout);
-							metricas=svm(a(ind_a),b(ind_b),stepGama(ind_sGama),stepSigma(ind_sSigma),baseGama(ind_Gama),baseSigma(ind_Sigma),X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test,l,H,lag);
-							best_mnsc_local(end+1)=metricas.mnsc;
-              disp("svm listo");  
-              fflush(stdout);
-						endfor
-            disp(a(ind_a));
-            fflush(stdout);
-						if(mean(best_mnsc_local)>mean(top_svm.mnsc))
-						  top_svm.mnsc=mean(best_mnsc_local);
-							top_svm.stepGama=stepGama(ind_sGama);
-							top_svm.stepSigma=stepSigma(ind_sSigma);
-							top_svm.a=a(ind_a);
-							top_svm.b=b(ind_b);
-							top_svm.baseGama=baseGama(ind_Gama);
-							top_svm.baseSigma=stepSigma(ind_Sigma);
-						endif						
-					endfor
-				endfor			
-			endfor
-		endfor
-	endfor
-endfor
+%mejor_svm(data,train_size,lag,H,l);
+
 
 %training_ar(X_Lf_train,Y_Lf_train,"Coeficientes_Lf");
 %Training HF

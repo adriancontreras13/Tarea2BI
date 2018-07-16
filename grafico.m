@@ -1,19 +1,22 @@
-function [graph]= grafico(msnc,l,h,lag)
-  n = length(XL_train);
-  m = n-l;
-  x = zeros(n,l+1);
-  for i=1:l+1
-    j=i;
-    k=1;
-    for p=j:n    
-      x(p,i)=XL_train(k);
-      k=k+1;    
-    endfor
+function [graficoid]= grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica)
+  figure(graficoid);
+  texto = strcat('Lag: ',num2str(mejor_metrica.lag),' MAE: ',num2str(mejor_metrica.mae),' RMSE: ',num2str(mejor_metrica.rmse),' R2: ',num2str(mejor_metrica.r2),' mNSE: ',num2str(mejor_metrica.mnsc));
+  titulo = strcat('mNSC v/s horizontes con hankel L = ',int2str(l));
+  hold on
+  leyendas=[];
+  for i=1:length(lag)
+    n = lag(i);
+    n = num2str(n);
+    leyenda = strcat('Lag = ',n);
+    leyendas = [leyendas; leyenda];
+    plot(array_mnsc(i,:),'-.*');
   endfor
-  disp(x);
-  x = x(l+1:n,:);
-  x =fliplr(x);
-  Xar=x(:,1:l);
-  Yar=x(:,l+1);
-  a=pinv(Xar)*Yar;
+  
+  legend(leyendas);
+  xlabel('Horizonte(dias)');
+  ylabel('mNSC');
+  text(4.5,-0.075,texto);
+  title(titulo);
+  hold off
+  
 end
