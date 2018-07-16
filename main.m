@@ -13,7 +13,7 @@ train_size = 0.8;
 %==============================================================================%
 l=500;
 H=1;
-lag = 40;
+lag = 20;
 %autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
 %==============================================================================% 
@@ -27,7 +27,7 @@ lag = [62 64 66];
 l = 2;
 %modelo_arr(data,train_size,h,l,lag);
 
-modelo_arx(data,train_size,h,l,lag);
+%modelo_arx(data,train_size,h,l,lag);
 
 %%%%%%%%%%%%%%%%%%%%%%%%% AAR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
