@@ -1,12 +1,12 @@
 function [graficoid]= grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,modelo)
   figure(graficoid);
-  fprintf("\n\nModelo: &s",modelo);
-  fprintf("\nLag: &s",num2str(mejor_metrica.lag));
-  fprintf("\nMAE: &s",num2str(mejor_metrica.mae));
-  fprintf("\nRMSE: &s",num2str(mejor_metrica.rmse));
-  fprintf("\nR2: &s",num2str(mejor_metrica.r2));
-  fprintf("\nRMSE: &s",num2str(mejor_metrica.rmse));
-  fprintf("\nmNSE: &s",num2str(mejor_metrica.mnsc));
+  fprintf("\n\nModelo: %s",modelo);
+  fprintf("\nLag: %s",num2str(mejor_metrica.lag));
+  fprintf("\nMAE: %s",num2str(mejor_metrica.mae));
+  fprintf("\nRMSE: %s",num2str(mejor_metrica.rmse));
+  fprintf("\nR2: %s",num2str(mejor_metrica.r2));
+  fprintf("\nRMSE: %s",num2str(mejor_metrica.rmse));
+  fprintf("\nmNSE: %s \n\n",num2str(mejor_metrica.mnsc));
   nombre=strcat("valoresModelo",modelo,".txt");
   save(nombre,"mejor_metrica");
   
