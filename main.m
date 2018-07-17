@@ -23,11 +23,19 @@ lag = 20;
 ACF(data,lag);
 %==============================================================================%
 h=20;
-lag = [62 64 66];
+lag = [64];
 l = 2;
 %modelo_arr(data,train_size,h,l,lag);
 
 %modelo_arx(data,train_size,h,l,lag);
+
+%modelo_mlp(data,train_size,h,l,lag);
+
+%modelo_mlpx(data,train_size,h,l,lag);
+
+%modelo_svm(data,train_size,h,l,lag);
+
+%modelo_svmx(data,train_size,h,l,lag);
 
 %%%%%%%%%%%%%%%%%%%%%%%%% AAR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
