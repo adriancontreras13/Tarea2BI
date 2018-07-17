@@ -23,11 +23,11 @@ H=1;
 %ACF(data,20);
 %==============================================================================%
 h=20;
-lag = [30 32];
-l = 5;
-modelo_arr(data,train_size,h,l,lag);
+lag = [62 64 66];
+l = 2;
+%modelo_arr(data,train_size,h,l,lag);
 
-
+modelo_arx(data,train_size,h,l,lag);
 
 %%%%%%%%%%%%%%%%%%%%%%%%% AAR %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -49,7 +49,7 @@ iteraciones = 1000;
 %mlp_main(X_LfHf_train,Y_LfHf_train,X_Hf_test,Y_Hf_test,topologias,iteraciones);
 
 %SVM%
-mejor_svm(data,train_size,lag,H,l);
+%mejor_svm(data,train_size,lag,H,l);
 
 
 %training_ar(X_Lf_train,Y_Lf_train,"Coeficientes_Lf");
