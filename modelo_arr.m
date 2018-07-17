@@ -30,7 +30,7 @@ function [modelo]= modelo_arr(data,train_size,h,l,lag)
     endfor
     array_mnsc = [array_mnsc;local_msnc];
   endfor
-  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"Modelo AAR: ");
+  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"AAR");
   %Grafico obtenido vs esperado
   titulo=" (AAR)";
   graficoid= graficoid+10;

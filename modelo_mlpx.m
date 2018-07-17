@@ -33,7 +33,7 @@ function [modelo]= modelo_mlpx(data,train_size,h,l,lag)
     array_mnsc = [array_mnsc;local_msnc];
   endfor
 
-  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"Modelo MLPX: ");
+  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"MLPX");
   %Grafico obtenido vs esperado
   titulo=" (MLPX)";
   graficoid= graficoid+10;

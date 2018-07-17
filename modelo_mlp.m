@@ -33,7 +33,7 @@ function [modelo]= modelo_mlp(data,train_size,h,l,lag)
     array_mnsc = [array_mnsc;local_msnc];
   endfor
 
-  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"Modelo MLP: ");
+  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"MLP");
   %Grafico obtenido vs esperado
   titulo=" (MLP)";
   graficoid= graficoid+10;

@@ -26,11 +26,12 @@ l = 2;
 %Grafico ACF  
 %ACF(data,lag);
 %==============================================================================%
-%modelo_arr(data,train_size,h,l,lag);
+lag=[62,63,64,65];
+modelo_arr(data,train_size,h,l,lag);
 
 %modelo_arx(data,train_size,h,l,lag);
 
-modelo_mlp(data,train_size,h,l,lag);
+%modelo_mlp(data,train_size,h,l,lag);
 
 %modelo_mlpx(data,train_size,h,l,lag);
 
