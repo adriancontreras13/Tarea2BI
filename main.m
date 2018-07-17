@@ -4,7 +4,7 @@ arreglo_hankel=[2,4,6,8,10,15,20,30,40,50];
 %Rango de las h del Horizonte
 arreglo_h=[20];
 %Arreglo de lags
-arreglo_lag=[2,4,6,8,10,15,20,25,30,35,40,45,50,60,64,70,80];
+lag=[62,63,64,65];
 %Datasets
 %data= csvread("mean-daily-temperature-fisher-ri.csv");
 data= csvread("daily-minimum-temperatures-in-me.csv");
@@ -17,17 +17,18 @@ lag = 20;
 %autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
 %==============================================================================% 
-%mejores_parametros(data,train_size,arreglo_lag,arreglo_hankel,arreglo_h);
-%==============================================================================%
-%Grafico ACF  
-ACF(data,lag);
+%mejores_parametros(data,train_size,lag,arreglo_hankel,arreglo_h);
 %==============================================================================%
 h=20;
-lag = [64];
+lag=[64]
 l = 2;
+%==============================================================================%
+%Grafico ACF  
+%ACF(data,lag);
+%==============================================================================%
 modelo_arr(data,train_size,h,l,lag);
 
-modelo_arx(data,train_size,h,l,lag);
+%modelo_arx(data,train_size,h,l,lag);
 
 %modelo_mlp(data,train_size,h,l,lag);
 
