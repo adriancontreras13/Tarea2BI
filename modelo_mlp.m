@@ -1,4 +1,4 @@
-function [modelo]= modelo_svmx(data,train_size,h,l,lag)
+function [modelo]= modelo_mlp(data,train_size,h,l,lag)
   topologias = [30 30];
   iteraciones = 1000;
   

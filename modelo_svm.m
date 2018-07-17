@@ -1,4 +1,4 @@
-function [modelo]= modelo_svmx(data,train_size,h,l,lag)
+function [modelo]= modelo_svm(data,train_size,h,l,lag)
   stepGama=4;
   stepSigma=4;
   a=1;
