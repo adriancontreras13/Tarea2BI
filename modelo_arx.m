@@ -5,7 +5,7 @@ function [modelo]= modelo_arx(data,train_size,h,l,lag)
   mejor_metrica.r2 = -99999;
   mejor_metrica.lag = 0;
   mejor_metrica.h= 0;
-  graficoid =1;
+  graficoid =3;
   array_mnsc = [];
   for ind_lag=1:length(lag)
     local_msnc = [];
@@ -27,6 +27,6 @@ function [modelo]= modelo_arx(data,train_size,h,l,lag)
     array_mnsc = [array_mnsc;local_msnc];
   endfor
 
-  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica);
+  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"Modelo AARX: ");
   
 end

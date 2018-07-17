@@ -25,9 +25,9 @@ ACF(data,lag);
 h=20;
 lag = [64];
 l = 2;
-%modelo_arr(data,train_size,h,l,lag);
+modelo_arr(data,train_size,h,l,lag);
 
-%modelo_arx(data,train_size,h,l,lag);
+modelo_arx(data,train_size,h,l,lag);
 
 %modelo_mlp(data,train_size,h,l,lag);
 
