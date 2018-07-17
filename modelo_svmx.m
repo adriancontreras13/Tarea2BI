@@ -12,6 +12,8 @@ function [modelo]= modelo_svmx(data,train_size,h,l,lag)
   mejor_metrica.r2 = -99999;
   mejor_metrica.lag = 0;
   mejor_metrica.h= 0;
+  mejor_metrica.y_obtenido = [];
+  mejor_metrica.y_esperado = [];
   graficoid =7;
   array_mnsc = [];
   for ind_lag=1:length(lag)
@@ -28,11 +30,17 @@ function [modelo]= modelo_svmx(data,train_size,h,l,lag)
         mejor_metrica.r2 = mnsc.r2;
         mejor_metrica.lag = lag(ind_lag);
         mejor_metrica.h=H;
+        mejor_metrica.y_obtenido = mnsc.y_obtenido;
+        mejor_metrica.y_esperado = mnsc.y_esperado;
       endif
     endfor
     array_mnsc = [array_mnsc;local_msnc];
   endfor
 
   graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"Modelo SVMX: ");
+  %Grafico obtenido vs esperado
+  titulo=" (SVMX)";
+  graficoid= graficoid+10;
+  plotObvsEsp(mejor_metrica.y_esperado,mejor_metrica.y_obtenido,titulo,graficoid);
   
 end
