@@ -1,10 +1,10 @@
 function [modelo]= modelo_svm(data,train_size,h,l,lag)
-  stepGama=20;
-  stepSigma=30;
-  a=60;
-  b=120;
-  baseGama=10;
-  baseSigma=10;
+  stepGama=5;
+  stepSigma=4;
+  a=1;
+  b=9;
+  baseGama=2;
+  baseSigma=2;
   
   mejor_metrica.mnsc =-9999999;
   mejor_metrica.mae = -999999;
@@ -23,6 +23,8 @@ function [modelo]= modelo_svm(data,train_size,h,l,lag)
       [X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test]=procesa_data(data,train_size,l,lag(ind_lag),H);
       %Insertar ARR y ARX          
       mnsc=svm(a,b,stepGama,stepSigma,baseGama,baseSigma,X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
+      disp("wea");
+      fflush(stdout);
       local_msnc(end+1)=mnsc.mnsc;
       if(mnsc.mnsc >mejor_metrica.mnsc)
         mejor_metrica.mnsc = mnsc.mnsc;

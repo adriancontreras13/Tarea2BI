@@ -1,4 +1,4 @@
-function [besty] = svm_func(a,b,stepGama,stepSigma,baseGama,baseSigma,X_train,Y_train,X_test,Y_test)
+function [y] = svm_func(a,b,stepGama,stepSigma,baseGama,baseSigma,X_train,Y_train,X_test,Y_test)
   [grid] = inicializarGrid(stepGama, stepSigma, baseSigma, baseGama ,a, b);
   for i=a:stepSigma : b
      for j = a: stepGama : b
@@ -6,23 +6,15 @@ function [besty] = svm_func(a,b,stepGama,stepSigma,baseGama,baseSigma,X_train,Y_
      endfor
   endfor
   Besterr= 200;
-  for j=1:length(grid)
-    g= grid(j,1);
-    s= grid(j,2);
+  
+  g= grid(1,1);
+  s= grid(1,2);
     %se inicializan los valores de alpha y beta
-    [alpha beta] = svm_train(X_train,Y_train,s,g);
+  [alpha beta] = svm_train(X_train,Y_train,s,g);
     %disp("TRAIN");
     %fflush(stdout);
-    [y]=svm_test(alpha, beta,X_train,X_test,s);
-    Err=mean((Y_test-y).^2);
-    Errors(end+1) = Err;
-    if (Err<Besterr)
-      bestAlpha = alpha;
-      bestbeta = beta;
-      bestsigma = s;
-      bestgamma = g;
-      Besterr=Err;
-      besty=y;
-    endif 
-  endfor 
+  [y]=svm_test(alpha, beta,X_train,X_test,s);
+  Err=mean((Y_test-y).^2);
+  Errors(end+1) = Err;
+
 end
