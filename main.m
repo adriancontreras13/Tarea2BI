@@ -20,14 +20,14 @@ lag = 80;
 %mejores_parametros(data,train_size,lag,arreglo_hankel,arreglo_h);
 %==============================================================================%
 h=20;
-lag=[64];
+lag=[63 64 65 66];
 l = 2;
 %==============================================================================%
 %Grafico ACF  
-%ACF(data,lag);
+%ACF(data,40);
 %==============================================================================%
-lag=[62,63,64,65];
-modelo_arr(data,train_size,h,l,lag);
+%lag=[64];
+%modelo_arr(data,train_size,h,l,lag);
 
 %modelo_arx(data,train_size,h,l,lag);
 
@@ -35,7 +35,7 @@ modelo_arr(data,train_size,h,l,lag);
 
 %modelo_mlpx(data,train_size,h,l,lag);
 
-%modelo_svm(data,train_size,h,l,lag);
+modelo_svm(data,train_size,h,l,lag);
 
 %modelo_svmx(data,train_size,h,l,lag);
 
