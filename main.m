@@ -32,9 +32,9 @@ l = 2;
 
 %modelo_mlp(data,train_size,h,l,lag);
 
-%modelo_mlpx(data,train_size,h,l,lag);
+modelo_mlpx(data,train_size,h,l,lag);
 
-modelo_svm(data,train_size,h,l,lag);
+%modelo_svm(data,train_size,h,l,lag);
 
 %modelo_svmx(data,train_size,h,l,lag);
 
