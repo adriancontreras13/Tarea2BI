@@ -6,26 +6,27 @@ arreglo_h=[20];
 %Arreglo de lags
 lag=[62,63,64,65];
 %Datasets
-%data= csvread("mean-daily-temperature-fisher-ri.csv");
-data= csvread("daily-minimum-temperatures-in-me.csv");
+data= csvread("mean-daily-temperature-fisher-ri.csv");
+%data= csvread("daily-minimum-temperatures-in-me.csv");
 data = data(:,2);
 train_size = 0.8;
 %==============================================================================%
 l=500;
 H=1;
-lag = 20;
+lag = 80;
 %autocovar = autocovarianza(data,l);
 %autocorre = autocorrelacion(data,l);
 %==============================================================================% 
 %mejores_parametros(data,train_size,lag,arreglo_hankel,arreglo_h);
 %==============================================================================%
 h=20;
-lag=[64]
+lag=[64];
 l = 2;
 %==============================================================================%
 %Grafico ACF  
 %ACF(data,lag);
 %==============================================================================%
+lag=[62,63,64,65];
 modelo_arr(data,train_size,h,l,lag);
 
 %modelo_arx(data,train_size,h,l,lag);

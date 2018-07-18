@@ -1,4 +1,4 @@
-function [X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test]=procesa_data2(data,train_size,l,lag,H)
+function [X_Lf_train,Y_Lf_train,X_Hf_train2,Y_Hf_train2,X_Lf_test,Y_Lf_test,X_Hf_test2,Y_Hf_test2]=procesa_data2(data,train_size,l,lag,H)
   %Normalizacion de data
   data = data/norm(data);
 
@@ -30,6 +30,6 @@ function [X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_t
   [X_Lf_test,Y_Lf_test] = train_split(Lf_test,lag,H);
   [X_Hf_test,Y_Hf_test] = train_split(Hf_test,lag,H);
   
-  [X_Hf_train,Y_Hf_train] =concat(X_Lf_train,X_Hf_train,Y_Hf_train); 
-  [X_Hf_test,Y_Hf_test] = concat(X_Lf_test,X_Hf_test,Y_Hf_test);
+  [X_Hf_train2,Y_Hf_train2] =concat(X_Lf_train,X_Hf_train,Y_Hf_train); 
+  [X_Hf_test2,Y_Hf_test2] = concat(X_Lf_test,X_Hf_test,Y_Hf_test);
 end

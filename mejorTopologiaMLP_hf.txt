@@ -1,8 +1,19 @@
-# Created by Octave 4.2.2, Mon Jul 09 12:30:14 2018 GMT <unknown@unknown>
+<<<<<<< Updated upstream
+# Created by Octave 4.2.2, Tue Jul 17 14:07:36 2018 -04 <francisco@francisco-X555LB>
 # name: topologia
 # type: matrix
 # rows: 1
 # columns: 2
- 5 5
+ 30 30
 
 
+=======
+# Created by Octave 4.2.2, Tue Jul 17 17:44:05 2018 GMT <unknown@unknown>
+# name: topologia
+# type: matrix
+# rows: 1
+# columns: 2
+ 30 30
+
+
+>>>>>>> Stashed changes

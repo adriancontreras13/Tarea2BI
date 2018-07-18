@@ -37,10 +37,12 @@ function [modelo]= modelo_svmx(data,train_size,h,l,lag)
     array_mnsc = [array_mnsc;local_msnc];
   endfor
 
-  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"Modelo SVMX: ");
+  graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"VMX");
   %Grafico obtenido vs esperado
   titulo=" (SVMX)";
   graficoid= graficoid+10;
   plotObvsEsp(mejor_metrica.y_esperado,mejor_metrica.y_obtenido,titulo,graficoid);
-  
+  %Grafico de Linear Fit
+  graficoid = graficoid+10;
+  Linear_fit(mejor_metrica.y_obtenido,mejor_metrica.y_esperado,titulo,graficoid);
 end
