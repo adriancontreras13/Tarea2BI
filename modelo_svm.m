@@ -1,10 +1,10 @@
 function [modelo]= modelo_svm(data,train_size,h,l,lag)
-  stepGama=4;
-  stepSigma=4;
-  a=1;
-  b=2;
-  baseGama=2;
-  baseSigma=2;
+  stepGama=20;
+  stepSigma=30;
+  a=60;
+  b=120;
+  baseGama=10;
+  baseSigma=10;
   
   mejor_metrica.mnsc =-9999999;
   mejor_metrica.mae = -999999;

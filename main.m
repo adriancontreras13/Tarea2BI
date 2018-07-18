@@ -24,10 +24,10 @@ lag=[64];
 l = 2;
 %==============================================================================%
 %Grafico ACF  
-%ACF(data,lag);
+ACF(data,40);
 %==============================================================================%
 lag=[62,63,64,65];
-modelo_arr(data,train_size,h,l,lag);
+%modelo_arr(data,train_size,h,l,lag);
 
 %modelo_arx(data,train_size,h,l,lag);
 
