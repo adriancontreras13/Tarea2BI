@@ -34,7 +34,7 @@ function [parameters] = mlp_save_parameters(x_train,y_train,x_test,y_test,topolo
       save(nombre,"bestWTrainGlobal");
     %  csvwrite("mejorPesoMLP.csv",bestWtrain);
       indexBestTopologia = i;
-      topologia = [topologias(indexBestTopologia,1) topologias(indexBestTopologia,2)];
+      topologia = [topologias(1,1) topologias(1,2)];
       nombre=strcat("mejorTopologiaMLP",frecuencia,".txt");
       save(nombre,"topologia");
     %  csvwrite("mejorTopologiaMLP.csv",topologia);
