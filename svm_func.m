@@ -10,9 +10,9 @@ function [besty] = svm_func(a,b,stepGama,stepSigma,baseGama,baseSigma,X_train,Y_
     g= grid(j,1);
     s= grid(j,2);
     %se inicializan los valores de alpha y beta
-    disp("T");
-    fflush(stdout);
     [alpha beta] = svm_train(X_train,Y_train,s,g);
+    %disp("TRAIN");
+    %fflush(stdout);
     [y]=svm_test(alpha, beta,X_train,X_test,s);
     Err=mean((Y_test-y).^2);
     Errors(end+1) = Err;

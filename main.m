@@ -24,9 +24,9 @@ lag=[64];
 l = 2;
 %==============================================================================%
 %Grafico ACF  
-ACF(data,40);
+%ACF(data,40);
 %==============================================================================%
-lag=[62,63,64,65];
+%lag=[64];
 %modelo_arr(data,train_size,h,l,lag);
 
 %modelo_arx(data,train_size,h,l,lag);
@@ -35,7 +35,7 @@ lag=[62,63,64,65];
 
 %modelo_mlpx(data,train_size,h,l,lag);
 
-%modelo_svm(data,train_size,h,l,lag);
+modelo_svm(data,train_size,h,l,lag);
 
 %modelo_svmx(data,train_size,h,l,lag);
 
