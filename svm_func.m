@@ -5,6 +5,8 @@ function [y] = svm_func(a,b,stepGama,stepSigma,baseGama,baseSigma,X_train,Y_trai
       grid(end+1,:)=[(baseGama(1))^j (baseSigma(1))^(i)]; 
      endfor
   endfor
+  disp(grid);
+  fflush(stdout);
   Besterr= 200;
   
   g= grid(1,1);
