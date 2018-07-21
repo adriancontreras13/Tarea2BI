@@ -1,0 +1,50 @@
+# Created by Octave 4.2.2, Sat Jul 21 17:57:57 2018 GMT <unknown@unknown>
+# name: mejor_metrica
+# type: scalar struct
+# ndims: 2
+ 1 1
+# length: 8
+# name: mnsc
+# type: scalar
+-9999999
+
+
+# name: mae
+# type: scalar
+-999999
+
+
+# name: rmse
+# type: scalar
+-99999
+
+
+# name: r2
+# type: scalar
+-99999
+
+
+# name: lag
+# type: scalar
+0
+
+
+# name: h
+# type: scalar
+0
+
+
+# name: y_obtenido
+# type: matrix
+# rows: 0
+# columns: 0
+
+
+# name: y_esperado
+# type: matrix
+# rows: 0
+# columns: 0
+
+
+
+
