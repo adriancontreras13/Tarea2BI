@@ -18,7 +18,6 @@ h=1;
 l = 9;
 more off;
 %==============================================================================%
-more off;
 %Grafico ACF  
 %ACF(data,40);
 %==============================================================================%
@@ -31,7 +30,7 @@ more off;
 
 %modelo_mlpx(data,train_size,h,l,lag);
 
-%modelo_svm(data,train_size,h,l,lag);
+modelo_svm(data,train_size,h,l,lag);
 
 %modelo_svmx(data,train_size,h,l,lag);
 
