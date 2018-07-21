@@ -8,6 +8,9 @@ function [modelo]= modelo_arx(data,train_size,h,l,lag)
   mejor_metrica.y_obtenido = [];
   mejor_metrica.y_esperado = [];
   graficoid =3;
+  lags_eval=[];
+  %lag.valor=99999;
+  %lag.metrica=-999999;
   array_mnsc = [];
   for ind_lag=1:length(lag)
     local_msnc = [];
@@ -17,6 +20,9 @@ function [modelo]= modelo_arx(data,train_size,h,l,lag)
       %Insertar ARR y ARX          
       mnsc=aar(X_Lf_train,Y_Lf_train,X_Hf_train,Y_Hf_train,X_Lf_test,Y_Lf_test,X_Hf_test,Y_Hf_test);
       local_msnc(end+1)=mnsc.mnsc;
+      lag.valor=ind_lag;
+      lag.metrica= mnsc.mnsc;
+      lags_eval(end+1)=mnsc.mnsc;
       if(mnsc.mnsc >mejor_metrica.mnsc)
         mejor_metrica.mnsc = mnsc.mnsc;
         mejor_metrica.mae = mnsc.mae;
@@ -30,6 +36,12 @@ function [modelo]= modelo_arx(data,train_size,h,l,lag)
     endfor
     array_mnsc = [array_mnsc;local_msnc];
   endfor
+  arreglo_ordenado=[];
+  arreglo_ordenado= sort(lags_eval);
+  for i=(length(arreglo_ordenado)-10):length(arreglo_ordenado)
+    fprintf("\n Lag %s : %s",num2str(arreglo_ordenado(i)),num2str(arreglo_ordenado(i)));
+  endfor
+  
 
   graficoid = grafico(array_mnsc,h,lag,l,graficoid,mejor_metrica,"AARX");
   %Grafico obtenido vs esperado

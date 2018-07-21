@@ -1,6 +1,6 @@
 function [X_Lf_train,Y_Lf_train,X_Hf_train2,Y_Hf_train2,X_Lf_test,Y_Lf_test,X_Hf_test2,Y_Hf_test2]=procesa_data2(data,train_size,l,lag,H)
   %Normalizacion de data
-  data = data/norm(data);
+  %data = (data - min(data))/(max(data)-min(data));
 
 
   %Matriz de Hankel
