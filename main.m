@@ -8,8 +8,7 @@ lag=[30];
 %Datasets
 data= csvread("dataeval.csv");
 %data= csvread("daily-minimum-temperatures-in-me.csv");
-
-data = data(:,1);
+%data = data(:,1);
 train_size = 0.7;
 %==============================================================================%
 %mejores_parametros(data,train_size,lag,arreglo_hankel,arreglo_h);
