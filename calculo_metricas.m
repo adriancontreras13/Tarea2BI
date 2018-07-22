@@ -1,4 +1,4 @@
-function [metricas]=calculo_metricas(y_additive,y_additive_test) 
+function [metricas]=calculo_metricas(y_additive,y_additive_test)
   e=y_additive_test-y_additive;
   metricas.mse=mean(e.^2);
   metricas.rmse=sqrt(metricas.mse);

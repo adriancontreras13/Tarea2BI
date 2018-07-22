@@ -3,15 +3,15 @@ function [K] = kernel(X,Y,sigma)
     for j = 1:rows(Y)
       if(columns(Y)==1)          
         if (columns(X)==1)
-          K(i,j)=exp((-1/(2*sigma))*((norm(X(i)-Y(j)))**2));
+          K(i,j)=exp((-1/(2*sigma))*((norm(X(i)-Y(j))).^2));
         else
-          K(i,j)=exp((-1/(2*sigma))*((norm(X(i,:)-Y(j)))**2));
+          K(i,j)=exp((-1/(2*sigma))*((norm(X(i,:)-Y(j))).^2));
         endif 
       else
         if (columns(X)==1)
-          K(i,j)=exp((-1/(2*sigma))*((norm(X(i)-Y(j,:)))**2));
+          K(i,j)=exp((-1/(2*sigma))*((norm(X(i)-Y(j,:))).^2));
         else
-          K(i,j)=exp((-1/(2*sigma))*((norm(X(i,:)-Y(j,:)))**2));
+          K(i,j)=exp((-1/(2*sigma))*((norm(X(i,:)-Y(j,:))).^2));
         endif
       endif
     endfor
