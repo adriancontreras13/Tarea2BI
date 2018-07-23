@@ -4,7 +4,7 @@ arreglo_hankel=[2,4,6,8,10,15,20,30,40,50];
 %Rango de las h del Horizonte
 arreglo_h=[20];
 %Arreglo de lags
-lag=[30];
+lag=[1];
 %Datasets
 data= csvread("dataeval.csv");
 %data= csvread("daily-minimum-temperatures-in-me.csv");
