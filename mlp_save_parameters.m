@@ -11,7 +11,7 @@ function [parameters] = mlp_save_parameters(x_train,y_train,x_test,y_test,topolo
   ArrayMseTopologias = [];
   indexBestTopologia =0 ;
   bestWTrainGlobal = [];
-  numTopo =(length(topologias));
+  numTopo =size(topologias)(1);
   for i = 1:numTopo
     mlp.HLayer = [topologias(i,1) topologias(i,2) topologias(i,3)];
     disp(mlp.HLayer);

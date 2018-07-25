@@ -1,5 +1,5 @@
 function [modelo]= modelo_mlpx(data,train_size,h,l,lag)
-  topologias = [30 30 30; 10 10 10; 40 40 40; 20 10 15; 30 20 15];
+  topologias = [30 30 30; 10 10 10];
   iteraciones = 3000;
   
   
