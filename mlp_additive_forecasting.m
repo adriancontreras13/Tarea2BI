@@ -10,6 +10,8 @@ function [metricas] = mlp_additive_forecasting(x_test_hf,y_test_hf,x_test_lf,y_t
   topologia_lf=topologia;
   y_lf=mlp_test_fp(x_test_lf,W_lf);
   y_additive=y_hf+y_lf;
+  %y_additive = y_hf;
   y_additive_test=y_test_hf+y_test_lf;
+  %y_additive_test = y_test_hf;
   metricas=calculo_metricas(y_additive,y_additive_test);
 endfunction

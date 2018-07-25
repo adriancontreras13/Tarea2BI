@@ -1,7 +1,7 @@
 function [A B]= svm_train(X, Y, sigma, gama)
-  n=length(X);
-  K=kernel(X,Y,sigma);
-  E=eye(n,n)/gama;
+  n=size(X,1);
+  K=kernel(X,sigma);
+  E=eye(n)/gama;
   H = K + E;
   mu= inv(H)*ones(n,1);
   V=inv(H)*Y;

@@ -1,0 +1,16 @@
+celda = {};
+lag = 1;
+mnsc = 0.5;
+celda{end+1} = {lag mnsc};
+lag = 2;
+mnsc = 0.51;
+celda{end+1} = {lag mnsc};
+lag = 4;
+mnsc = 0.31;
+celda{end+1} = {lag mnsc};
+lag = 5;
+mnsc = 0.6;
+celda{end+1} = {lag mnsc};
+disp(celda);
+out = sort(celda,2);
+disp(out);
